@@ -1,0 +1,167 @@
+:root {
+    --bg-dark: #121212;
+    --bg-panel: #1e1e1e;
+    --primary: #3b82f6;
+    --accent-x: #ef4444;
+    --accent-o: #22c55e;
+    --text-main: #ffffff;
+    --text-muted: #94a3b8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh; /* Gunakan min-height agar bisa scroll jika layar pendek */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden; /* Mencegah scroll horizontal */
+}
+
+/* --- TRANSITIONS & SCREENS --- */
+.screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px; /* Tambahan padding agar konten tidak mepet tepi HP */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.95);
+    z-index: -1;
+    display: none; /* Penting untuk mobile agar layout tidak tumpang tindih */
+}
+
+.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: scale(1);
+    z-index: 1;
+    display: flex; /* Kembalikan ke flex saat aktif */
+}
+
+/* --- MAIN MENU --- */
+.title-container { text-align: center; margin-bottom: 30px; }
+h1 { font-size: 2.5rem; line-height: 1.1; letter-spacing: 2px; text-transform: uppercase; }
+.subtitle { color: var(--text-muted); margin-top: 10px; font-size: 1rem; }
+
+.menu-controls { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 15px; }
+
+.level-selector { background: var(--bg-panel); padding: 15px; border-radius: 12px; }
+.level-selector label { display: block; margin-bottom: 10px; color: var(--text-muted); font-size: 0.9rem; }
+.level-buttons { display: flex; gap: 8px; }
+
+.lvl-btn {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--text-muted);
+    color: var(--text-muted);
+    padding: 10px 5px; /* Padding lebih kecil untuk HP kecil */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.lvl-btn strong { font-size: 1.1rem; }
+.lvl-btn span { font-size: 0.6rem; font-weight: normal; margin-top: 2px; text-align: center; }
+.lvl-btn.active, .lvl-btn:hover { border-color: var(--primary); color: var(--primary); background: rgba(59, 130, 246, 0.1); }
+
+.primary-btn {
+    background: var(--primary); color: white; border: none; padding: 15px;
+    font-size: 1.2rem; font-weight: bold; border-radius: 8px; cursor: pointer;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); transition: transform 0.2s;
+    width: 100%;
+}
+.primary-btn:active { transform: scale(0.98); }
+
+.secondary-btn { background: transparent; border: 1px solid var(--text-muted); color: var(--text-muted); padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; }
+
+/* --- GAME SCREEN --- */
+.game-header {
+    width: 100%; max-width: 450px; display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 15px;
+}
+.icon-btn { background: none; border: none; color: var(--text-muted); font-size: 0.9rem; cursor: pointer; padding: 10px; }
+
+.game-info { text-align: center; }
+#level-display { display: block; font-size: 0.75rem; color: var(--text-muted); }
+#status-display { font-size: 1.2rem; font-weight: bold; }
+
+.p-x { color: var(--accent-x); }
+.p-o { color: var(--accent-o); }
+
+/* BOARD RESPONSIVE */
+.game-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.game-board {
+    display: grid;
+    gap: 8px;
+    background: var(--bg-panel);
+    padding: 10px;
+    border-radius: 15px;
+    
+    /* KUNCI RESPONSIVE: */
+    width: 100%;
+    max-width: 400px; /* Batas lebar di desktop */
+    aspect-ratio: 1 / 1; /* Pastikan selalu kotak sempurna */
+}
+
+.cell {
+    background: var(--bg-dark);
+    border-radius: 8px;
+    display: flex; justify-content: center; align-items: center;
+    cursor: pointer;
+    user-select: none;
+    width: 100%;
+    height: 100%; /* Mengisi grid area sepenuhnya */
+    
+    /* Font size responsive: menyesuaikan dengan ukuran kotak */
+    font-size: clamp(1.5rem, 8vw, 3rem); 
+    font-weight: bold;
+}
+.cell:active { background: #2a2a2a; }
+
+/* Animasi & Highlight */
+.about-to-die span { opacity: 0.3; transform: scale(0.8); transition: 0.5s; }
+.cell.win { background: rgba(255, 255, 255, 0.1); border: 2px solid var(--text-main); }
+.cell span { animation: popIn 0.3s; }
+
+@keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
+
+.queue-indicator { text-align: center; margin-top: 20px; color: var(--text-muted); font-size: 0.9rem; padding: 0 10px;}
+
+/* --- MODAL --- */
+.modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85); z-index: 100;
+    display: flex; justify-content: center; align-items: center;
+    backdrop-filter: blur(5px);
+    padding: 20px;
+}
+.modal-content { background: var(--bg-panel); padding: 25px; border-radius: 15px; max-width: 400px; width: 100%; }
+.modal h2 { margin-bottom: 15px; color: var(--primary); font-size: 1.5rem;}
+.modal ul { margin-left: 20px; margin-bottom: 20px; line-height: 1.5; font-size: 0.9rem; }
+#btn-close-modal { width: 100%; padding: 12px; background: var(--primary); border: none; color: white; border-radius: 5px; font-weight: bold;}
+
+/* --- MEDIA QUERY KHUSUS MOBILE KECIL --- */
+@media (max-width: 400px) {
+    h1 { font-size: 2rem; }
+    .game-board { gap: 5px; padding: 5px; }
+    .cell { border-radius: 4px; }
+}

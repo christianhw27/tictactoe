@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Tic Tac Toe</title>
+    <link rel="icon" type="image/png+xml" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="main-menu" class="screen active">
+        <div class="title-container">
+            <h1 class="glitch-text">INFINITE<br>TIC TAC TOE</h1>
+            <p class="subtitle">Endless Strategy</p>
+        </div>
+
+        <div class="menu-controls">
+            <div class="level-selector">
+                <label>Select Board Size:</label>
+                <div class="level-buttons">
+                    <button class="lvl-btn active" data-size="3" data-win="3">
+                        3x3
+                        <span>Classic (Win 3)</span>
+                    </button>
+                    <button class="lvl-btn" data-size="5" data-win="4">
+                        5x5
+                        <span>Medium (Win 4)</span>
+                    </button>
+                    <button class="lvl-btn" data-size="6" data-win="5">
+                        6x6
+                        <span>Hard (Win 5)</span>
+                    </button>
+                </div>
+            </div>
+
+            <button id="btn-play" class="primary-btn">PLAY GAME</button>
+            <button id="btn-howto" class="secondary-btn">How to Play</button>
+        </div>
+    </div>
+
+    <div id="game-screen" class="screen hidden">
+        <header class="game-header">
+            <button id="btn-back" class="icon-btn">← Menu</button>
+            <div class="game-info">
+                <span id="level-display">3x3 Mode</span>
+                <span id="status-display">Turn: <span class="p-x">X</span></span>
+            </div>
+            <button id="btn-reset" class="icon-btn">↻ Reset</button>
+        </header>
+        
+        <div class="game-container">
+            <div id="board" class="game-board"></div>
+        </div>
+
+        <div class="queue-indicator">
+            <p>Max symbols per player: <span id="max-moves-display">3</span></p>
+            <small>Oldest symbol will be removed when limit is reached.</small>
+        </div>
+    </div>
+
+    <div id="modal-howto" class="modal hidden">
+        <div class="modal-content">
+            <h2>How to Play</h2>
+            <ul>
+                <li><strong>Infinite:</strong> No draws. If the board is full or limit reached, your first symbol disappears.</li>
+                <li><strong>Winning:</strong> Align symbols (Horizontal, Vertical, Diagonal).</li>
+                <li><strong>3x3:</strong> Need 3 in a row (Max 3 symbols).</li>
+                <li><strong>5x5:</strong> Need 4 in a row (Max 4 symbols).</li>
+                <li><strong>6x6:</strong> Need 5 in a row (Max 5 symbols).</li>
+            </ul>
+            <button id="btn-close-modal">Got it</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
