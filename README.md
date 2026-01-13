@@ -1,9 +1,10 @@
+<div align="center">
 # ♾️ Infinite Tic Tac Toe
 
 ![Project Status](https://img.shields.io/badge/status-active-success) ![License](https://img.shields.io/badge/license-MIT-blue) ![Language](https://img.shields.io/badge/language-HTML%20%7C%20CSS%20%7C%20JS-yellow)
 
 > **Tic Tac Toe, but the game never ends until someone wins.** > A strategic twist on the classic game where your oldest moves disappear as you play. No draws, just pure strategy.
-
+</div>
 ---
 
 ## 🎮 The Concept
