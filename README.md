@@ -28,7 +28,6 @@ The rules are simple but change the strategy entirely:
     * **6x6 (Hard):** Max 5 symbols, Match 5 to win. Complex territory control.
 * **📱 Fully Responsive:** Optimized for Desktop, Tablet, and Mobile. The board scales perfectly to fit your screen.
 * **🎨 Minimalist Dark UI:** Clean design with smooth animations and "fading" indicators for symbols about to be removed.
-* **🌐 Online Multiplayer:** (Feature in progress) Play with friends remotely.
 
 ---
 
